@@ -1,0 +1,216 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.MainContainer {
+    background: linear-gradient(to right,#665eff, #4453c5);
+    width: 90%;
+    height: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    align-content: center;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 8;
+}
+
+.c1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 24%;
+    bottom: 0%;
+    background-color: #e2e2e2;
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: 500ms ease-in-out;
+}
+
+.c2 {
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    left: 20%;
+    top: 1%;
+    background-color: #b7d7df;
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: 500ms ease-in-out;
+}
+
+.c3 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 22%;
+    right: 18%;
+    background-color: #b7d7df;
+    border-radius: 50%;
+    opacity: 0.3;
+
+}
+
+.c4 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: 3%;
+    bottom: 1%;
+    background-color: #e2e2e2;
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: 500ms ease-in-out;
+}
+
+.c5 {
+
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 40%;
+    right: 28%;
+    background-color: #dad8ff;
+    border-radius: 50%;
+    opacity: 0.9;
+    -webkit-mask-image: radial-gradient(circle, transparent 40%, black 41%);
+    object-fit: cover;
+}
+
+
+
+.l1 {
+    position: absolute;
+    height: 60px;
+    width: 450px;
+    left: 14%;
+    top: 35%;
+    background: #d98a4a;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+  }
+  
+.l2 {
+    position: absolute;
+    height: 50px;
+    width: 250px;
+    left: 0%;
+    top: 83%;
+    background: #d98a4a;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.l3 {
+    position: absolute;
+    height: 50px;
+    width: 250px;
+    left: 0%;
+    top: 50%;
+    background: #dad8ff;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.l3-s {
+    position: absolute;
+    height: 52px;
+    width: 250px;
+    left: -6.25%;
+    top: 50%;
+    background: #ffffff;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(90deg);
+}
+
+.l4 {
+
+    position: absolute;
+    height: 25px;
+    width: 125px;
+    left: 27%;
+    top: 56%;
+    background: #dad8ff;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+  
+.LoginContainer {
+    background-color: white;
+    width: 40%;
+    height: 86%;
+    border-radius: 15px;
+    box-shadow: 25px;
+    text-align: center;
+    z-index:10;
+}
+
+.LoginContainer h1 {
+
+    text-align: center;
+    padding-top: 15px;
+}
+
+.LoginContainer-h3 {
+
+    text-align: center;
+    opacity: 0.5;
+    margin-top: -5px;
+    margin-bottom: 55px;
+}
+
+.ForgotPassword {
+    margin-right: 15%;
+    float: right;
+}
+
+.ForgotPassword-p {
+    color: #888787;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.ForgotPassword-p:hover {
+    color: black;
+}
+
+
+input {
+    width: 70%;
+    margin-bottom: 25px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 3px 6px 3px #f6f6f6;;
+    border: 1px solid #f6f6f6;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    color: white;
+    width: 70%;
+    margin-top: 50px;
+    background-color: #4066f0;
+    border-radius: 15px;
+    border: none;
+}
+
+button:hover {
+    background-color: #0f43ff;
+    cursor: pointer;
+}
+
