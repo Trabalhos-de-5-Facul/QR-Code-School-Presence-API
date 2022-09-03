@@ -22,7 +22,7 @@ body, html{
     z-index: 8;
 }
 
-.c1 {
+.Circle1 {
     position: absolute;
     width: 200px;
     height: 200px;
@@ -34,7 +34,7 @@ body, html{
     transition: 500ms ease-in-out;
 }
 
-.c2 {
+.Circle2 {
     position: absolute;
     width: 270px;
     height: 270px;
@@ -46,7 +46,7 @@ body, html{
     transition: 500ms ease-in-out;
 }
 
-.c3 {
+.Circle3 {
     position: absolute;
     width: 200px;
     height: 200px;
@@ -58,7 +58,7 @@ body, html{
 
 }
 
-.c4 {
+.Circle4 {
     position: absolute;
     width: 200px;
     height: 200px;
@@ -70,8 +70,7 @@ body, html{
     transition: 500ms ease-in-out;
 }
 
-.c5 {
-
+.Circle5 {
     position: absolute;
     width: 80px;
     height: 80px;
@@ -80,13 +79,13 @@ body, html{
     background-color: #dad8ff;
     border-radius: 50%;
     opacity: 0.9;
-    -webkit-mask-image: radial-gradient(circle, transparent 40%, black 41%);
+    -webkit-mask-image: radial-gradient(circle, transparent 48%, black 41%);
     object-fit: cover;
 }
 
 
 
-.l1 {
+.Line1 {
     position: absolute;
     height: 60px;
     width: 450px;
@@ -98,19 +97,19 @@ body, html{
     transform: rotate(-45deg);
   }
   
-.l2 {
+.Line2 {
     position: absolute;
     height: 50px;
-    width: 250px;
-    left: 0%;
-    top: 83%;
+    width: 220px;
+    left: 1%;
+    top: 82%;
     background: #d98a4a;
     border-radius: 30px;
     opacity: 0.9;
     transform: rotate(-45deg);
 }
 
-.l3 {
+.Line3 {
     position: absolute;
     height: 50px;
     width: 250px;
@@ -122,7 +121,7 @@ body, html{
     transform: rotate(-45deg);
 }
 
-.l3-s {
+.Line3-s {
     position: absolute;
     height: 52px;
     width: 250px;
@@ -134,8 +133,7 @@ body, html{
     transform: rotate(90deg);
 }
 
-.l4 {
-
+.Line4 {
     position: absolute;
     height: 25px;
     width: 125px;
@@ -145,6 +143,89 @@ body, html{
     border-radius: 30px;
     opacity: 0.9;
     transform: rotate(-45deg);
+}
+
+.Line5 {
+    position: absolute;
+    height: 50px;
+    width: 220px;
+    right: 29.2%;
+    top: 82%;
+    background: #d98a4a;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.Line6 {
+    position: absolute;
+    height: 28px;
+    width: 140px;
+    right: 17%;
+    top: 70%;
+    background: #d98a4a;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.Line7 {
+    position: absolute;
+    height: 28px;
+    width: 140px;
+    right: 1%;
+    top: 40%;
+    background: #dad8ff;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.Line7-s {
+    position: absolute;
+    height: 40px;
+    width: 140px;
+    right: -1.74%;
+    top: 40%;
+    background: #ffffff;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(90deg);
+}
+
+.Line8 {
+    position: absolute;
+    height: 46px;
+    width: 220px;
+    right: 13%;
+    top: 17%;
+    background: #d98a4a;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.Line9 {
+    position: absolute;
+    height: 28px;
+    width: 140px;
+    left: 6%;
+    top: 6%;
+    background: #dad8ff;
+    border-radius: 30px;
+    opacity: 0.9;
+    transform: rotate(-45deg);
+}
+
+.Line9-s {
+    position: absolute;
+    height: 30px;
+    width: 140px;
+    left: 6%;
+    top: 0%;
+    background: #ffffff;
+    border-radius: 30px;
+    opacity: 0.9;
 }
   
 .LoginContainer {
@@ -193,7 +274,7 @@ input {
     height: 40px;
     border-radius: 5px;
     box-shadow: 3px 6px 3px #f6f6f6;;
-    border: 1px solid #f6f6f6;
+    border: 2.5px solid #f6f6f6;
 }
 
 input:focus {
@@ -205,7 +286,7 @@ button {
     width: 70%;
     margin-top: 50px;
     background-color: #4066f0;
-    border-radius: 15px;
+    border-radius: 5px;
     border: none;
 }
 
