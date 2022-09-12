@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
@@ -9,6 +10,7 @@ const rotaJogos = require("./routes/jogos");
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // Para dados JSON
+app.use(cors());
 
 // Permissão de origem e cabeçalho para todos os servidores
 app.use((req, res, next) => {
@@ -27,6 +29,11 @@ app.use((req, res, next) => {
 
 // Chamada das rotas
 app.use("/jogos", rotaJogos);
+
+// Rota padrão da API
+app.use("/", (req, res) => {
+  return res.json({ server: "online" });
+});
 
 // Tratamento de erro ao não encontrar uma Rota válida
 app.use((req, res, next) => {

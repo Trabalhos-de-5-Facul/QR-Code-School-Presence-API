@@ -24,4 +24,35 @@ router.get("/", (req, res, next) => {
   });
 });
 
+router.post("/", (req, res, next) => {
+  const body = req.body;
+  if (body.nome == null || body.nota == null) {
+    return res.status(400).end();
+  }
+
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      "INSERT INTO Jogos (Nome, Nota) VALUES (?,?)",
+      [body.nome, body.nota],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(201).send({
+          mensagem: "Jogo cadastrado com sucesso",
+          jogoId: result.insertId,
+          request: {
+            tipo: "POST",
+            descricao: "Cadastra um Jogo",
+          },
+        });
+      }
+    );
+  });
+});
+
 module.exports = router;
