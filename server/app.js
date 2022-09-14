@@ -4,7 +4,13 @@ const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
-const rotaJogos = require("./routes/jogos");
+const rotaAlunos = require("./routes/alunos");
+const rotaAulas = require("./routes/aulas");
+const rotaDisciplinas = require("./routes/disciplinas");
+const rotaProfessores = require("./routes/professores");
+const rotaFrequenta = require("./routes/frequenta");
+const rotaMatricula = require("./routes/matricula");
+const rotaMinistra = require("./routes/ministra");
 
 // Uso do Morgan para monitoramento de requisições
 app.use(morgan("dev"));
@@ -28,7 +34,13 @@ app.use((req, res, next) => {
 });
 
 // Chamada das rotas
-app.use("/jogos", rotaJogos);
+app.use("/alunos", rotaAlunos);
+app.use("/aulas", rotaAulas);
+app.use("/disciplinas", rotaDisciplinas);
+app.use("/professores", rotaProfessores);
+app.use("/frequenta", rotaFrequenta);
+app.use("/matricula", rotaMatricula);
+app.use("/ministra", rotaMinistra);
 
 // Rota padrão da API
 app.use("/", (req, res) => {
