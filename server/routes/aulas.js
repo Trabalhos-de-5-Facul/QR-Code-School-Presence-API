@@ -142,7 +142,7 @@ router.patch("/", (req, res, next) => {
   });
 });
 
-// Rota para deletar um Aluno
+// Rota para deletar uma Aula
 router.delete("/", (req, res, next) => {
   const body = req.body;
   if (body.cod == null) {
