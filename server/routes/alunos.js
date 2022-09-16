@@ -26,7 +26,7 @@ router.get("/", (req, res, next) => {
 });
 
 // Rota para verificar um Aluno pela senha e email
-router.get("/:senha/:email/:ra", (req, res, next) => {
+router.get("/:senha/:email", (req, res, next) => {
   const params = req.params;
   if (params.senha == null || params.email == null) {
     return res.status(400).end();
@@ -37,21 +37,25 @@ router.get("/:senha/:email/:ra", (req, res, next) => {
       return res.status(500).send({ erro: err });
     }
     conn.query(
-      "CALL verifica_aluno(?,?)",
+      "CALL verifica_aluno(?,?,@output); SELECT @output;",
       [params.senha, params.email],
-      (err, result, field) => {
+      (err, result, field, rows) => {
         conn.release();
         if (err) {
           return res.status(500).send({ erro: err });
         }
-        return res.status(200).send({
-          request: {
-            tipo: "GET",
-            descricao: "Verifica um Aluno pela senha e email",
-          },
-          quantidade: result.length,
-          ra: result,
-        });
+
+        if (result[1][0]["@output"] == -1) {
+          return res.status(500).send({ erro: "Email ou Senha incorretos." });
+        } else {
+          return res.status(200).send({
+            request: {
+              tipo: "GET",
+              descricao: "Verifica um Aluno pela senha e email",
+            },
+            ra: result[1][0]["@output"],
+          });
+        }
       }
     );
   });

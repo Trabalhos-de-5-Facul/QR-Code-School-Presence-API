@@ -6,6 +6,7 @@ const pool = db.createPool({
   user: "admin",
   password: "userunix123qwe",
   database: "escola",
+  multipleStatements: true,
 });
 
 exports.pool = pool;

@@ -25,11 +25,10 @@ router.get("/", (req, res, next) => {
   });
 });
 
-/*
 // Rota para verificar um Professor pela senha e email
-router.get("/verifica/", (req, res, next) => {
-  const body = req.body;
-  if (body.senha == null || body.email == null || body.ra == null) {
+router.get("/:senha/:email/", (req, res, next) => {
+  const params = req.params;
+  if (params.senha == null || params.email == null) {
     return res.status(400).end();
   }
 
@@ -38,26 +37,29 @@ router.get("/verifica/", (req, res, next) => {
       return res.status(500).send({ erro: err });
     }
     conn.query(
-      "CALL verifica_prof(?,?)",
-      [body.senha, body.email],
-      (err, result, field) => {
+      "CALL verifica_prof(?,?,@output); SELECT @output;",
+      [params.senha, params.email],
+      (err, result, field, rows) => {
         conn.release();
         if (err) {
           return res.status(500).send({ erro: err });
         }
-        return res.status(200).send({
-          request: {
-            tipo: "GET",
-            descricao: "Verifica um Professor pela senha e email",
-          },
-          quantidade: result.length,
-          cod: result,
-        });
+
+        if (result[1][0]["@output"] == -1) {
+          return res.status(500).send({ erro: "Email ou Senha incorretos." });
+        } else {
+          return res.status(200).send({
+            request: {
+              tipo: "GET",
+              descricao: "Verifica um Professor pela senha e email",
+            },
+            cod: result[1][0]["@output"],
+          });
+        }
       }
     );
   });
 });
-*/
 
 // Rota para inserir um Professor
 router.post("/", (req, res, next) => {

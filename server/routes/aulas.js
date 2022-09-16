@@ -72,7 +72,7 @@ router.post("/", (req, res, next) => {
 
 // Rota para lecionar uma Aula
 router.post("/:cod", (req, res, next) => {
-  const params = req.params.cod;
+  const params = req.params;
   if (params.cod == null) {
     return res.status(400).end();
   }
