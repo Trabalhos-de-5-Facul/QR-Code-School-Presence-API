@@ -9,7 +9,7 @@ router.get("/", (req, res, next) => {
     if (err) {
       return res.status(500).send({ erro: err });
     }
-    conn.query("SELECT * FROM Matrícula", (err, result, field) => {
+    conn.query("SELECT * FROM Matricula_se", (err, result, field) => {
       conn.release();
       if (err) {
         return res.status(500).send({ erro: err });
