@@ -25,6 +25,37 @@ router.get("/", (req, res, next) => {
   });
 });
 
+// Rota para verificar um Professor pelo seu código
+router.get("/:cod", (req, res, next) => {
+  const params = req.params;
+  if (params.cod == null) {
+    return res.status(400).end();
+  }
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      "SELECT * FROM Professores WHERE COD_PROF = ?",
+      [params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          request: {
+            tipo: "GET",
+            descricao: "Retorna um Professor pelo seu código",
+          },
+          quantidade: result.length,
+          professor: result,
+        });
+      }
+    );
+  });
+});
+
 // Rota para verificar um Professor pela senha e email
 router.get("/:senha/:email/", (req, res, next) => {
   const params = req.params;

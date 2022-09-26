@@ -2,6 +2,38 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db").pool;
 
+// Rota para verificar relação de Ministrar pelo código do Professor
+router.get("/:cod", (req, res, next) => {
+  const params = req.params;
+  if (params.cod == null) {
+    return res.status(400).end();
+  }
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      "SELECT * FROM Ministra WHERE fk_Professores_COD_PROF = ?",
+      [params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          request: {
+            tipo: "GET",
+            descricao:
+              "Retorna uma relação de Ministrar pelo código do Professor",
+          },
+          quantidade: result.length,
+          ministra: result,
+        });
+      }
+    );
+  });
+});
+
 // Rota para inserir a relação de Ministrar de um Professor
 router.post("/", (req, res, next) => {
   const body = req.body;
