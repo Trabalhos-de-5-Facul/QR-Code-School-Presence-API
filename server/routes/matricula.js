@@ -2,6 +2,31 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db").pool;
 
+
+
+router.get("/", (req, res, next) => {
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query("SELECT * FROM Matricula_se", (err, result, field) => {
+      conn.release();
+      if (err) {
+        return res.status(500).send({ erro: err });
+      }
+      return res.status(200).send({
+        request: {
+          tipo: "GET",
+          descricao: "Retorna todos os Alunos matriculados",
+        },
+        quantidade: result.length,
+        matricula: result,
+      });
+    });
+  });
+});
+
+
 // Rota para inserir Matrícula de um Aluno
 router.post("/", (req, res, next) => {
   const body = req.body;
@@ -32,6 +57,8 @@ router.post("/", (req, res, next) => {
     );
   });
 });
+
+
 
 // Rota para deletar a Matrícula de um Aluno
 router.delete("/", (req, res, next) => {
