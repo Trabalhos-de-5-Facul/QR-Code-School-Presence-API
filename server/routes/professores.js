@@ -26,7 +26,7 @@ router.get("/", (req, res, next) => {
 });
 
 // Rota para verificar um Professor pelo seu código
-router.get("/:cod", (req, res, next) => {
+router.get("/:cod/", (req, res, next) => {
   const params = req.params;
   if (params.cod == null) {
     return res.status(400).end();
