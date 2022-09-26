@@ -25,6 +25,37 @@ router.get("/", (req, res, next) => {
   });
 });
 
+// Rota para verificar Aulas pelo código da Disciplina
+router.get("/:cod/", (req, res, next) => {
+  const params = req.params;
+  if (params.cod == null) {
+    return res.status(400).end();
+  }
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      "SELECT * FROM Aula WHERE fk_Disciplina_COD_DISC = ?",
+      [params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          request: {
+            tipo: "GET",
+            descricao: "Retorna Aulas pelo código da Disciplina",
+          },
+          quantidade: result.length,
+          aulas: result,
+        });
+      }
+    );
+  });
+});
+
 // Rota para inserir uma Aula
 router.post("/", (req, res, next) => {
   const body = req.body;
