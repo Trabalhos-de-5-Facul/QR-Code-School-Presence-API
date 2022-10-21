@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const rotaAlunos = require("./routes/alunos");
 const rotaAulas = require("./routes/aulas");
@@ -17,6 +18,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // Para dados JSON
 app.use(cors());
+
+app.use(helmet());
 
 // Permissão de origem e cabeçalho para todos os servidores
 app.use((req, res, next) => {
