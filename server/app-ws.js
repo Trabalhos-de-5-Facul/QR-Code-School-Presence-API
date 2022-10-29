@@ -1,7 +1,5 @@
 const WebSocket = require("ws");
-
-const clients = new Map();
-
+const clients = require("./clientes.js");
 function onError(ws, err) {
   console.error(`onError: ${err.message}`);
 }
@@ -43,6 +41,16 @@ function uuidv4() {
   });
 }
 
+const Inform = function Inform(message){
+  const outbound = JSON.stringify(message);
+
+  [...clients.keys()].forEach((client) => {
+    client.send(outbound);
+  });
+};
+
+
+
 /*
 wss.on('connection', (ws) => {
     const id = uuidv4();
@@ -57,7 +65,7 @@ wss.on('connection', (ws) => {
 }
 */
 
-module.exports = (server) => {
+exports.on = (server) => {
   const wss = new WebSocket.Server({
     server,
   });
@@ -67,3 +75,4 @@ module.exports = (server) => {
   console.log(`App Web Socket Server is running!`);
   return wss;
 };
+exports.Inform = Inform;
