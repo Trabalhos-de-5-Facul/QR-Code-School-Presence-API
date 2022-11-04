@@ -20,7 +20,7 @@ router.get("/", (req, res, next) => {
           descricao: "Retorna todas as Frequencias",
         },
         quantidade: result.length,
-        professores: result,
+        frequencias: result,
       });
     });
   });
