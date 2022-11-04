@@ -28,12 +28,14 @@ router.get("/", (req, res, next) => {
 
 // Rota para inserir Frequência de um Aluno
 router.post("/", (req, res, next) => {
+  const body = req.body;
+
   try {
-    ws.Inform("foi");
+    ws.Inform(body.ra_aluno);
   } catch (Error) {
     console.log(Error);
   }
-  const body = req.body;
+
   if (body.ra_aluno == null || body.cod_aula == null || body.presenca == null) {
     return res.status(400).end();
   }
@@ -64,13 +66,14 @@ router.post("/", (req, res, next) => {
 
 // Rota para atualizar a Frequência de um Aluno
 router.patch("/", (req, res, next) => {
+  const body = req.body;
+
   try {
-    ws.Inform("foi");
+    ws.Inform(body.ra_aluno);
   } catch (Error) {
     console.log(Error);
   }
 
-  const body = req.body;
   if (body.ra_aluno == null || body.cod_aula == null || body.presenca == null) {
     return res.status(400).end();
   }
