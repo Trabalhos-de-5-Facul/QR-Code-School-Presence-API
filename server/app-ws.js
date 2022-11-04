@@ -41,7 +41,7 @@ function uuidv4() {
   });
 }
 
-const Inform = function Inform(message){
+const Inform = function Inform(message) {
   const outbound = JSON.stringify(message);
 
   [...clients.keys()].forEach((client) => {
@@ -49,20 +49,12 @@ const Inform = function Inform(message){
   });
 };
 
-
-
 /*
-wss.on('connection', (ws) => {
-    const id = uuidv4();
-    const color = Math.floor(Math.random() * 360);
-    const metadata = { id, color };
-
-    clients.set(ws, metadata);
-
-    ws.on("message", (data) => onMessage(ws, data));
-    ws.on("error", (error) => onError(ws, error));
-    console.log(`onConnection`);
-}
+const interval = setInterval(() => {
+  [...clients.keys()].forEach((client) => {
+    console.log(client.readyState);
+  });
+}, 30000);
 */
 
 exports.on = (server) => {
