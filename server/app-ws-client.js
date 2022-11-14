@@ -5,9 +5,9 @@ const WebSocketClient = () => {
     console.log("Tentando conectar...");
     con.onmessage = async (res) => {
       console.log(res.data);
-      con.send('manda nudes');
+      con.send('pong');
+      
     }
   }
 
 module.exports = { WebSocketClient };
-
