@@ -1,13 +1,11 @@
-const ws2 = require("./app-ws2");
-
 const WebSocket = require("ws");
-const clients = require("./clientes.js");
+const clients = require("./clientes-arduino.js");
 function onError(ws, err) {
   console.error(`onError: ${err.message}`);
 }
 
 function onMessage(ws, data) {
-  console.log(`onMessage: ${data}`);
+  console.log(`Mensagem Recebida: ${data}`);
   ws.send(`recebido`);
   const message = JSON.parse(data);
   const metadata = clients.get(ws);
@@ -27,19 +25,13 @@ function onConnection(ws, req) {
   const metadata = { id, color };
   clients.set(ws, metadata);
 
-  try {
-    ws2.Inform2("Chamada Iniciada");
-  } catch (Error) {
-    console.log(Error);
-  }
-
   ws.on("message", (data) => onMessage(ws, data));
   ws.on("error", (error) => onError(ws, error));
   ws.on("close", () => {
-    ws.send(`Desconectado ao WebSocket para Web`);
+    ws.send(`Desconectado ao WebSocket para Arduino`);
     clients.delete(ws);
   });
-  console.log(`Conexão no WebSocket para Web`);
+  console.log(`Conexão no WebSocket para Arduino`);
 }
 
 function uuidv4() {
@@ -50,7 +42,7 @@ function uuidv4() {
   });
 }
 
-const Inform = function Inform(message) {
+const Inform2 = function Inform2(message) {
   const outbound = JSON.stringify(message);
 
   [...clients.keys()].forEach((client) => {
@@ -73,7 +65,7 @@ exports.on = (server) => {
 
   wss.on("connection", onConnection);
 
-  console.log(`App Web Socket Online!`);
+  console.log(`NodeMCU Web Socket Online!`);
   return wss;
 };
-exports.Inform = Inform;
+exports.Inform2 = Inform2;

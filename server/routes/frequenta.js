@@ -26,7 +26,7 @@ router.get("/", (req, res, next) => {
   });
 });
 
-//Rota para 
+//Rota para
 router.get("/:cod", (req, res, next) => {
   const params = req.params;
   if (params.cod == null) {
@@ -37,7 +37,8 @@ router.get("/:cod", (req, res, next) => {
     if (err) {
       return res.status(500).send({ erro: err });
     }
-    conn.query(`SELECT * from Alunos 
+    conn.query(
+      `SELECT * from Alunos 
     inner Join Matricula_se
     on Matricula_se.fk_Alunos_RA = Alunos.RA
     inner join Disciplina
@@ -57,21 +58,22 @@ router.get("/:cod", (req, res, next) => {
     on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA
     where Professores.COD_PROF = ? and CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1)
     and Frequenta.presenca_aluno = 0`,
-    [params.cod],
-    (err, result, field) => {
-      conn.release();
-      if (err) {
-        return res.status(500).send({ erro: err });
+      [params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          request: {
+            tipo: "GET",
+            descricao: "",
+          },
+          quantidade: result.length,
+          alunos: result,
+        });
       }
-      return res.status(200).send({
-        request: {
-          tipo: "GET",
-          descricao: "",
-        },
-        quantidade: result.length,
-        alunos: result,
-      });
-    });
+    );
   });
 });
 
