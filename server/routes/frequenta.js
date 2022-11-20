@@ -57,7 +57,7 @@ router.get("/:cod", (req, res, next) => {
     inner join Frequenta
     on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA
     where Professores.COD_PROF = ? and CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1)
-    and Frequenta.presenca_aluno = 0 order by nome_aluno`,
+    and Frequenta.presenca_aluno = 0 order by nome_aluno group by COD_FREQUENTA`,
       [params.cod],
       (err, result, field) => {
         conn.release();
