@@ -44,7 +44,7 @@ router.get("/:ra/", (req, res, next) => {
     inner join Aula 
     on Disciplina.COD_DISC = Aula.fk_Disciplina_COD_DISC
     inner join Frequenta 
-    on Frequenta.fk_Aula_COD_AULA = Disciplina.COD_DISC 
+    on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA 
     Where RA = ? and  CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1`,
     [params.ra],
     (err, result, field) => {
