@@ -38,16 +38,12 @@ router.get("/:cod", (req, res, next) => {
       return res.status(500).send({ erro: err });
     }
     conn.query(
-      `SELECT nome_aluno, RA, COD_DISC from Alunos 
-    inner Join Matricula_se
-    on Matricula_se.fk_Alunos_RA = Alunos.RA
-    inner join Disciplina
-    on Disciplina.COD_DISC = Matricula_se.fk_Disciplina_COD_DISC
-    inner join Aula 
-    on Aula.fk_Disciplina_COD_DISC = Disciplina.COD_DISC
-    inner join Frequenta
-    on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA
-    where Aula.COD_AULA = (SELECT COD_AULA FROM Professores
+      `SELECT nome_aluno, RA, fk_Aula_COD_AULA as COD_AULA from Alunos 
+    inner Join Frequenta
+    on Frequenta.fk_Alunos_RA = Alunos.RA
+    inner join Aula
+    on Aula.COD_AULA = Frequenta.fk_Aula_COD_AULA
+    where COD_AULA = (SELECT COD_AULA FROM Professores
     inner join Ministra
     on Ministra.fk_Professores_COD_PROF = Professores.COD_PROF
     inner join Disciplina
@@ -57,7 +53,7 @@ router.get("/:cod", (req, res, next) => {
     inner join Frequenta
     on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA
     where Professores.COD_PROF = 14 and CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1)
-    and Frequenta.presenca_aluno = 0 group by nome_aluno;`,
+    and Frequenta.presenca_aluno = 0`,
       [params.cod],
       (err, result, field) => {
         conn.release();
