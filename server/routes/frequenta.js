@@ -38,7 +38,7 @@ router.get("/:cod", (req, res, next) => {
       return res.status(500).send({ erro: err });
     }
     conn.query(
-      `SELECT nome_aluno, RA, COD_AULA from Alunos 
+      `SELECT * from Alunos 
     inner Join Matricula_se
     on Matricula_se.fk_Alunos_RA = Alunos.RA
     inner join Disciplina
@@ -57,7 +57,7 @@ router.get("/:cod", (req, res, next) => {
     inner join Frequenta
     on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA
     where Professores.COD_PROF = ? and CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1)
-    and Frequenta.presenca_aluno = 0 order by nome_aluno group by COD_FREQUENTA`,
+    and Frequenta.presenca_aluno = 0 group by COD_FREQUENTA`,
       [params.cod],
       (err, result, field) => {
         conn.release();
