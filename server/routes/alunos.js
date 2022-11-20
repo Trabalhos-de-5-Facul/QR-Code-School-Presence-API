@@ -36,9 +36,7 @@ router.get("/:ra/", (req, res, next) => {
     if (err) {
       return res.status(500).send({ erro: err });
     }
-    conn.query(`SELECT nome_disc, COD_AULA, inicio_aula, fim_aula, 
-    fk_Professores_COD_PROF as COD_PROF, COD_DISC, 
-    CURRENT_TIMESTAMP() as TIMESTAMP FROM Alunos FROM Alunos
+    conn.query(`SELECT nome_disc, COD_AULA, inicio_aula, fim_aula, fk_Professores_COD_PROF as COD_PROF, COD_DISC, CURRENT_TIMESTAMP() as TIMESTAMP FROM Alunos
     inner join Matricula_se
     on Alunos.RA = Matricula_se.fk_Alunos_RA
     inner join Disciplina
