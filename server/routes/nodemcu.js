@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db").pool;
 const ws = require("../app-ws");
 
-var cod_chamada;
+var cod_chamada = -1;
 
-//Rota para
+//Rota para NodeMCU
 router.get("/:cod", (req, res, next) => {
   const params = req.params;
   if (params.cod == null) {
@@ -20,10 +19,20 @@ router.get("/:cod", (req, res, next) => {
     } catch (Error) {
       console.log(Error);
     }
+
+    console.log("cod_chamada: " + cod_chamada);
+    return res.status(201).send({
+      mensagem: "OVERWRITE",
+    });
   }
+
+  console.log("cod_chamada: " + cod_chamada);
+  return res.status(201).send({
+    mensagem: "NO OVERWRITE",
+  });
 });
 
-//
+// Rota para NodeMCU 2
 router.post("/", (req, res, next) => {
   const body = req.body;
 
@@ -39,5 +48,17 @@ router.post("/", (req, res, next) => {
     } catch (Error) {
       console.log(Error);
     }
+
+    console.log("cod_chamada: " + cod_chamada);
+    return res.status(201).send({
+      mensagem: "OVERWRITE",
+    });
   }
+
+  console.log("cod_chamada: " + cod_chamada);
+  return res.status(201).send({
+    mensagem: "NO OVERWRITE",
+  });
 });
+
+module.exports = router;

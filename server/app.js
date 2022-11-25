@@ -12,6 +12,7 @@ const rotaProfessores = require("./routes/professores");
 const rotaFrequenta = require("./routes/frequenta");
 const rotaMatricula = require("./routes/matricula");
 const rotaMinistra = require("./routes/ministra");
+const rotaNodemcu = require("./routes/nodemcu");
 
 // Uso do Morgan para monitoramento de requisições
 app.use(morgan("dev"));
@@ -44,6 +45,7 @@ app.use("/professores", rotaProfessores);
 app.use("/frequenta", rotaFrequenta);
 app.use("/matricula", rotaMatricula);
 app.use("/ministra", rotaMinistra);
+app.use("/nodemcu", rotaNodemcu);
 
 // Rota padrão da API
 app.use("/", (req, res) => {
