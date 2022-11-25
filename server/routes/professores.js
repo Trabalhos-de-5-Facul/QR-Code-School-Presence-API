@@ -56,6 +56,46 @@ router.get("/:cod/", (req, res, next) => {
   });
 });
 
+// Rota para buscar informações da aula atual de um aluno
+router.get("/aula/:cod/", (req, res, next) => {
+  const params = req.params;
+  if (params.cod == null) {
+    return res.status(400).end();
+  }
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      `SELECT nome_disc, COD_AULA, inicio_aula, fim_aula, 
+      COD_PROF, COD_DISC,
+      CURRENT_TIMESTAMP() as TIMESTAMP FROM Professores
+      inner join Ministra
+      on Professores.COD_PROF = Ministra.fk_Professores_COD_PROF
+      inner join Disciplina
+      on Ministra.fk_Disciplina_COD_DISC = Disciplina.COD_DISC
+      inner join Aula 
+      on Disciplina.COD_DISC = Aula.fk_Disciplina_COD_DISC
+      Where COD_PROF = ? and  CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1`,
+      [params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          request: {
+            tipo: "GET",
+            descricao: "Retorna informações da aula atual de um professor",
+          },
+          quantidade: result.length,
+          aula: result,
+        });
+      }
+    );
+  });
+});
+
 // Rota para verificar um Professor pela senha e email
 router.get("/:senha/:email/", (req, res, next) => {
   const params = req.params;
