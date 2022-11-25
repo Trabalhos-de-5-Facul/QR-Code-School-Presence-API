@@ -36,7 +36,7 @@ router.get("/:ra/", (req, res, next) => {
     if (err) {
       return res.status(500).send({ erro: err });
     }
-    conn.query(`SELECT * FROM Alunos
+    conn.query(`SELECT nome_disc, COD_AULA, inicio_aula, fim_aula, fk_Professores_COD_PROF as COD_PROF, COD_DISC, CURRENT_TIMESTAMP() as TIMESTAMP FROM Alunos
     inner join Matricula_se
     on Alunos.RA = Matricula_se.fk_Alunos_RA
     inner join Disciplina
@@ -44,7 +44,7 @@ router.get("/:ra/", (req, res, next) => {
     inner join Aula 
     on Disciplina.COD_DISC = Aula.fk_Disciplina_COD_DISC
     inner join Frequenta 
-    on Frequenta.fk_Aula_COD_AULA = Disciplina.COD_DISC 
+    on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA 
     Where RA = ? and  CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1`,
     [params.ra],
     (err, result, field) => {
