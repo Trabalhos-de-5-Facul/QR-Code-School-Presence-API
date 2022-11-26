@@ -56,7 +56,7 @@ router.get("/:cod/", (req, res, next) => {
   });
 });
 
-// Rota para buscar informações da aula atual de um aluno
+// Rota para buscar informações da aula atual de um professor
 router.get("/aula/:cod/", (req, res, next) => {
   const params = req.params;
   if (params.cod == null) {
