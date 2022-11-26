@@ -73,6 +73,39 @@ router.get("/:cod", (req, res, next) => {
   });
 });
 
+//Rota que retorna a frequência de um aluno em uma aula
+router.get("/aula/:ra/:cod", (req, res, next) => {
+  const params = req.params;
+  if (params.cod == null || params.ra == null) {
+    return res.status(400).end();
+  }
+
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      `SELECT presenca_aluno FROM Frequenta
+      WHERE fk_Alunos_RA = ? and fk_Aula_COD_AULA = ?`,
+      [params.ra, params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          request: {
+            tipo: "GET",
+            descricao: "Retorna a frequência de um aluno em uma aula",
+          },
+          quantidade: result.length,
+          frequencia: result,
+        });
+      }
+    );
+  });
+});
+
 router.get("/:presenca/:ra/:cod", (req, res, next) => {
   const params = req.params;
   if (params.presenca == null || params.ra == null || params.cod == null) {
