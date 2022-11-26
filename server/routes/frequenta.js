@@ -73,6 +73,36 @@ router.get("/:cod", (req, res, next) => {
   });
 });
 
+router.get("/:presenca/:ra/:cod", (req, res, next) => {
+  const params = req.params;
+  if (params.presenca == null || params.ra == null || params.cod == null) {
+    return res.status(400).end();
+  }
+
+  db.getConnection((err, conn) => {
+    if (err) {
+      return res.status(500).send({ erro: err });
+    }
+    conn.query(
+      "UPDATE Frequenta SET presenca_aluno = ? WHERE fk_Alunos_RA = ? AND fk_Aula_COD_AULA = ?",
+      [params.presenca, params.ra, params.cod],
+      (err, result, field) => {
+        conn.release();
+        if (err) {
+          return res.status(500).send({ erro: err });
+        }
+        return res.status(200).send({
+          mensagem: "Frequência atualizada com sucesso",
+          request: {
+            tipo: "GET",
+            descricao: "Atualiza uma Frequência",
+          },
+        });
+      }
+    );
+  });
+});
+
 // Rota para inserir Frequência de um Aluno
 router.post("/", (req, res, next) => {
   const body = req.body;
@@ -138,7 +168,7 @@ router.patch("/", (req, res, next) => {
           return res.status(500).send({ erro: err });
         }
         return res.status(201).send({
-          mensagem: "Frequência atualizado com sucesso",
+          mensagem: "Frequência atualizada com sucesso",
           request: {
             tipo: "PATCH",
             descricao: "Atualiza uma Frequência",
