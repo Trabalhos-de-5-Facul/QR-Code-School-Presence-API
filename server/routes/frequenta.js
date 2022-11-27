@@ -112,6 +112,12 @@ router.get("/:presenca/:ra/:cod", (req, res, next) => {
     return res.status(400).end();
   }
 
+  try {
+    ws.Inform(params.ra);
+  } catch (Error) {
+    console.log(Error);
+  }
+
   db.getConnection((err, conn) => {
     if (err) {
       return res.status(500).send({ erro: err });
@@ -140,14 +146,14 @@ router.get("/:presenca/:ra/:cod", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const body = req.body;
 
+  if (body.ra_aluno == null || body.cod_aula == null || body.presenca == null) {
+    return res.status(400).end();
+  }
+
   try {
     ws.Inform(body.ra_aluno);
   } catch (Error) {
     console.log(Error);
-  }
-
-  if (body.ra_aluno == null || body.cod_aula == null || body.presenca == null) {
-    return res.status(400).end();
   }
 
   db.getConnection((err, conn) => {
@@ -178,14 +184,14 @@ router.post("/", (req, res, next) => {
 router.patch("/", (req, res, next) => {
   const body = req.body;
 
+  if (body.ra_aluno == null || body.cod_aula == null || body.presenca == null) {
+    return res.status(400).end();
+  }
+
   try {
     ws.Inform(body.ra_aluno);
   } catch (Error) {
     console.log(Error);
-  }
-
-  if (body.ra_aluno == null || body.cod_aula == null || body.presenca == null) {
-    return res.status(400).end();
   }
 
   db.getConnection((err, conn) => {
