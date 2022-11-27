@@ -111,6 +111,8 @@ router.get("/:presenca/:ra/:cod", (req, res, next) => {
   if (params.presenca == null || params.ra == null || params.cod == null) {
     return res.status(400).end();
   }
+  
+  params.ra = parseInt(params.ra);
 
   try {
     ws.Inform(params.ra);
