@@ -52,7 +52,7 @@ router.get("/:cod", (req, res, next) => {
     on Aula.fk_Disciplina_COD_DISC = Disciplina.COD_DISC
     inner join Frequenta
     on Frequenta.fk_Aula_COD_AULA = Aula.COD_AULA
-    where Professores.COD_PROF = 14 and CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1)
+    where Professores.COD_PROF = ? and CURRENT_TIMESTAMP() between inicio_aula and fim_aula LIMIT 1)
     and Frequenta.presenca_aluno = 0`,
       [params.cod],
       (err, result, field) => {
